@@ -2,6 +2,8 @@ const express = require("express");
 const connectDb = require("./conn/conn.js");
 const userRouter = require("./routes/user");
 const bookRouter = require("./routes/book.js");
+const favouriteRouter = require("./routes/favourite.js");
+
 require("dotenv").config();
 
 const app = express();
@@ -14,6 +16,7 @@ app.get("/", (req, res) => {
 app.use(express.json());
 app.use("/api/v1", userRouter);
 app.use("/api/v1", bookRouter);
+app.use("/api/v1", favouriteRouter);
 
 //create port
 app.listen(process.env.PORT, () => {
