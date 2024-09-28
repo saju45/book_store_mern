@@ -3,6 +3,7 @@ const connectDb = require("./conn/conn.js");
 const userRouter = require("./routes/user");
 const bookRouter = require("./routes/book.js");
 const favouriteRouter = require("./routes/favourite.js");
+const cartRouter = require("./routes/cart.js");
 
 require("dotenv").config();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use("/api/v1", userRouter);
 app.use("/api/v1", bookRouter);
 app.use("/api/v1", favouriteRouter);
+app.use("/api/v1", cartRouter);
 
 //create port
 app.listen(process.env.PORT, () => {
