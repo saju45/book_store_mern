@@ -1,6 +1,7 @@
 const express = require("express");
 const connectDb = require("./conn/conn.js");
 const userRouter = require("./routes/user");
+const bookRouter = require("./routes/book.js");
 require("dotenv").config();
 
 const app = express();
@@ -12,6 +13,7 @@ app.get("/", (req, res) => {
 
 app.use(express.json());
 app.use("/api/v1", userRouter);
+app.use("/api/v1", bookRouter);
 
 //create port
 app.listen(process.env.PORT, () => {
