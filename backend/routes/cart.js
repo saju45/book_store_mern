@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const User = require("../models/user");
 const { authenticateToken } = require("./userAuth");
-const Book = require("../models/book");
 
 //add book to cart
 router.put("/add-to-cart", authenticateToken, async (req, res) => {
