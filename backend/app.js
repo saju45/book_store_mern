@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const connectDb = require("./conn/conn.js");
 const userRouter = require("./routes/user");
 const bookRouter = require("./routes/book.js");
@@ -15,6 +16,7 @@ app.get("/", (req, res) => {
   res.send("HI I am book store app create me shanawaj hossain saju");
 });
 
+app.use(cors());
 app.use(express.json());
 app.use("/api/v1", userRouter);
 app.use("/api/v1", bookRouter);
