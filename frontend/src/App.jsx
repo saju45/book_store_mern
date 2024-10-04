@@ -4,6 +4,9 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
+import Favourties from "./components/Profile/Favourites";
+import Settings from "./components/Profile/Settings";
+import UserOrderHistory from "./components/Profile/UserOrderHistory";
 import ViewBookDetails from "./components/viewBook details/ViewBookDetails";
 import AllBooks from "./pages/AllBooks";
 import Cart from "./pages/Cart";
@@ -33,7 +36,11 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route path="/all-books" element={<AllBooks />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<Profile />}>
+          <Route index element={<Favourties />} />
+          <Route path="/profile/orderHistory" element={<UserOrderHistory />} />
+          <Route path="/profile/settings" element={<Settings />} />
+        </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/view-book-details/:id" element={<ViewBookDetails />} />
