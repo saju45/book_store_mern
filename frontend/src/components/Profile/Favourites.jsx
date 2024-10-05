@@ -27,7 +27,7 @@ export default function Favourties() {
 
   return (
     <>
-      {favrioutes.length === 0 && (
+      {favrioutes?.length === 0 && (
         <div className=" w-full h-[100%] text-5xl font-semibold text-zinc-500 flex items-center justify-center">
           No Favourite Books
         </div>

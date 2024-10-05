@@ -25,8 +25,8 @@ export default function AllBooks() {
       {" "}
       <h4 className="text-3xl text-yellow-100">All books</h4>
       {!data && (
-        <div className="flex items-center justify-center my-8">
-          <Loder />
+        <div className="w-full h-screen flex items-center justify-center">
+          <Loder />{" "}
         </div>
       )}
       <div className="my-8 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-8 ">

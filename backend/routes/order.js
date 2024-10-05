@@ -11,17 +11,17 @@ router.post("/place-order", authenticateToken, async (req, res) => {
     const { order } = req.body;
 
     for (const orderData of order) {
-      const newOrder = await Order({ user: id, book: orderData?._id });
+      const newOrder = new Order({ user: id, book: orderData?._id });
       const orderDataFromDb = await newOrder.save();
 
       //saveing order in user model
       await User.findByIdAndUpdate(id, {
-        $push: { orders: orderDataFromDb?._id },
+        $push: { orders: orderData?._id },
       });
 
       //cleaning cart
       await User.findByIdAndUpdate(id, {
-        $pull: { cart: orderDataFromDb?._id },
+        $pull: { cart: orderData?._id },
       });
     }
 

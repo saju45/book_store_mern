@@ -5,7 +5,7 @@ const userRouter = require("./routes/user");
 const bookRouter = require("./routes/book.js");
 const favouriteRouter = require("./routes/favourite.js");
 const cartRouter = require("./routes/cart.js");
-const orderRouter = require("./routes/cart.js");
+const orderRouter = require("./routes/order.js");
 
 require("dotenv").config();
 
