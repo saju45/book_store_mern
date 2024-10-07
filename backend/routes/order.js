@@ -16,7 +16,7 @@ router.post("/place-order", authenticateToken, async (req, res) => {
 
       //saveing order in user model
       await User.findByIdAndUpdate(id, {
-        $push: { orders: orderData?._id },
+        $push: { orders: orderDataFromDb?._id },
       });
 
       //cleaning cart
@@ -63,7 +63,7 @@ router.get("/get-all-order", authenticateToken, async (req, res) => {
         path: "book",
       })
       .populate({
-        psth: "user",
+        path: "user",
       })
       .sort({ createdAt: 1 });
 

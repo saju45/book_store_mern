@@ -100,6 +100,9 @@ router.put("/update-address", authenticateToken, async (req, res) => {
   try {
     const { id } = req.headers;
     const { address } = req.body;
+
+    console.log(address);
+
     await User.findByIdAndUpdate(id, { address: address });
     return res.status(200).json({ message: "Address updated successfull" });
   } catch (error) {

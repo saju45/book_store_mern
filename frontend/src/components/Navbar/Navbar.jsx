@@ -22,13 +22,26 @@ export default function Navbar() {
       title: "Profile",
       link: "/profile",
     },
+    {
+      title: "Admin Profile",
+      link: "/profile",
+    },
   ];
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  console.log({ isLoggedIn });
+  const role = useSelector((state) => state.auth.role);
+
+  console.log(role);
 
   if (isLoggedIn === false) {
     links.splice(2, 2);
+  }
+  if (isLoggedIn === true && role === "admin") {
+    links.splice(3, 1);
+  }
+
+  if (isLoggedIn === true && role === "user") {
+    links.splice(4, 1);
   }
 
   return (
@@ -47,7 +60,7 @@ export default function Navbar() {
           <div className="hidden md:flex gap-4">
             {links.map((item, i) => (
               <div className="flex items-center" key={i}>
-                {item.title === "Profile" ? (
+                {item.title === "Profile" || item.title === "Admin Profile" ? (
                   <Link
                     to={item.link}
                     className="px-4 py-1 border border-blue-500 rounded hover:bg-white hover:text-zinc-800 transition-all duration-300"

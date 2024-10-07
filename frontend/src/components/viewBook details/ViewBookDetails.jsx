@@ -5,19 +5,22 @@ import { MdDeleteOutline } from "react-icons/md";
 
 import { GrLanguage } from "react-icons/gr";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Loder from "../../components/Loder/Loder.jsx";
 
 export default function ViewBookDetails() {
   const [data, setData] = useState();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const role = useSelector((state) => state.auth.role);
+  const navigate = useNavigate();
   const { id } = useParams();
   const headers = {
     bookid: id,
-    id: localStorage.getItem("id"),
+    adminid: localStorage.getItem("id"),
     authorization: `Bearer ${localStorage.getItem("token")}`,
   };
+
+  console.log({ headers });
 
   console.log(`Bearer ${localStorage.getItem("token")}`);
 
@@ -47,11 +50,24 @@ export default function ViewBookDetails() {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      const response = await axios.delete(
+        "http://localhost:1000/api/v1/delete-book",
+        { headers }
+      );
+      alert(response.data.message);
+      navigate("/all-books");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     const fetch = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:1000/api/v1/get-book-by-id/${id}`
+          `http://localhost:1000/api/v1//get-book-by-id//${id}`
         );
 
         setData(response.data?.data);
@@ -100,10 +116,18 @@ export default function ViewBookDetails() {
 
             {isLoggedIn === true && role === "admin" && (
               <div className="flex flex-col md:flex-row lg:flex-col items-center justify-between lg:justify-start mt-4 lg:mt-0">
-                <button className="bg-white rounded lg:rounded-full text-3xl md:p-3 p-2  flex items-center justify-center">
+                <button
+                  className="bg-white rounded lg:rounded-full text-3xl md:p-3 p-2  flex items-center justify-center"
+                  onClick={() => {
+                    navigate(`/update-book/${id}`);
+                  }}
+                >
                   <FaEdit /> <span className="ms-4 block lg:hidden">Edit</span>
                 </button>
-                <button className="text-red-500 rounded lg:rounded-full text-3xl p-2 ms-4 md:ms-0 lg:mt-4 mt-8 md:mt-0 bg-white flex items-center justify-center">
+                <button
+                  className="text-red-500 rounded lg:rounded-full text-3xl p-2 ms-4 md:ms-0 lg:mt-4 mt-8 md:mt-0 bg-white flex items-center justify-center"
+                  onClick={handleDelete}
+                >
                   <MdDeleteOutline />{" "}
                   <span className="ms-4 block lg:hidden">Delete Book</span>
                 </button>

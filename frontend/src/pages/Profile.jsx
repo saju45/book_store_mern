@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Loder from "../components/Loder/Loder";
+import MobileNav from "../components/Profile/MobileNav";
 import SideBar from "../components/Profile/SideBar";
 
 export default function Profile() {
@@ -36,8 +37,9 @@ export default function Profile() {
       {profile && (
         <>
           {" "}
-          <div className="w-full md:w-1/6 h-screen">
+          <div className="w-full md:w-1/6 h-auto lg:h-screen">
             <SideBar data={profile} />
+            <MobileNav />
           </div>
           <div className="w-full md:w-5/6">
             <Outlet />

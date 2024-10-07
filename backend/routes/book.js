@@ -35,10 +35,10 @@ router.post("/add-book", authenticateToken, async (req, res) => {
 //add book -> admin
 router.put("/update-book", authenticateToken, async (req, res) => {
   try {
-    const { bookid, adminid } = req.headers;
+    const { bookid, id } = req.headers;
 
     const { url, title, author, price, desc, language } = req.body;
-    const userData = await User.findById(adminid);
+    const userData = await User.findById(id);
 
     console.log({ userData });
 
@@ -70,7 +70,11 @@ router.delete("/delete-book", authenticateToken, async (req, res) => {
   try {
     const { bookid, adminid } = req.headers;
 
+    console.log({ bookid, adminid });
+
     const userData = await User.findById(adminid);
+
+    console.log({ userData });
 
     if (userData?.role !== "admin") {
       return res
@@ -115,6 +119,8 @@ router.get("/get-recent-books", async (req, res) => {
 router.get("/get-book-by-id/:id", async (req, res) => {
   try {
     const { id } = req.params;
+    console.log({ id });
+
     const book = await Book.findById(id);
     return res.json({
       status: "success ",
